@@ -139,7 +139,8 @@ class WifiClient:
                 # This will require all network hardware to re-register
                 # with the ARP tables if still present.
                 if num_failures == 0:
-                    cli_no_output('ip', '-s', '-s', 'neigh', 'flush',
+                    #cli_no_output
+                    cli('ip', '-s', '-s', 'neigh', 'flush',
                                         self.ap.subnet + '.0/24')
 
                 # now look at the hardware that has responded, if no entry
@@ -178,6 +179,7 @@ class WifiClient:
         status = self.get_connection_info()
 
         for cell in Cell.all(self.wiface):
+            LOG.debug(cell)
             if "x00" in cell.ssid:
                 continue  # ignore hidden networks
 
@@ -242,7 +244,7 @@ class WifiClient:
             LOG.info("Disconnecting %s id: %s" % (ssid, nid))
 
     def get_connection_info(self):
-        res = cli('wpa_cli', '-i', self.wiface, 'status')
+        res = cli('/home/respeaker/hostap/wpa_supplicant/wpa_cli', '-i', self.wiface, 'status')
         out = str(res["stdout"])
         if out:
             return dict(o.split("=") for o in out.split("\n")[:-1])

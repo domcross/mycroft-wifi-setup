@@ -47,7 +47,7 @@ def cli(*args):
 
 def wpa(*args):
     idx = 0
-    result = cli('wpa_cli', '-i', *args)
+    result = cli('/home/respeaker/hostap/wpa_supplicant/wpa_cli', '-i', *args)
     out = result["stdout"]
     if 'interface' in out:
         idx = 1

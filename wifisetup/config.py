@@ -18,7 +18,7 @@ no_redirect_url = "mycroft.ai"
 server_url = "http://start.mycroft.ai"
 ssid = "MYCROFT"
 password = "12345678"
-device_name = "mycroft-holmes-i"
+device_name = "DIRECT-MYCROFT-MK2"
 
 websocket = {
     'protocol': 'ws://',

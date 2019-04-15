@@ -55,7 +55,8 @@ address=/#/{server}
 
     def get_iface(self):
         for iface in pyw.winterfaces():
-            if "wlan0" in iface:
+            #if "wlan0" in iface:
+            if "p2p" in iface:
                 return iface
         raise RuntimeError('No p2p interfaces are up')
 

@@ -52,12 +52,13 @@ LOG = logging.getLogger(__name__)
 
 WPA_SUPPLICANT = '''# p2p_start
 ctrl_interface=/var/run/wpa_supplicant
+country=DE
 driver_param=p2p_device=1
 update_config=1
 device_name=''' + config.device_name + '''
 device_type=1-0050F204-1
-p2p_go_intent=10
-p2p_go_ht40=1
+p2p_go_intent=15
+#p2p_go_ht40=1
 
 network={
     ssid="''' + config.ssid + '''"
@@ -68,9 +69,19 @@ network={
     auth_alg=OPEN
     mode=3
     disabled=2
+    frequency=2412
 }
 # p2p_end'''
 
+WPA_SUPPLICANT1 = '''# p2p_start
+network={
+    ssid="''' + config.ssid + '''"
+    psk="''' + config.password + '''"
+    mode=2
+    key_mgmt=WPA-PSK
+    frequency=2437
+}
+# p2p_end'''
 
 def run_wifi(allow_timeout='True'):
     try:
