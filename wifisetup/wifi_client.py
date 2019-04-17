@@ -244,7 +244,7 @@ class WifiClient:
             LOG.info("Disconnecting %s id: %s" % (ssid, nid))
 
     def get_connection_info(self):
-        res = cli('/home/respeaker/hostap/wpa_supplicant/wpa_cli', '-i', self.wiface, 'status')
+        res = cli('/home/respeaker/mycroft-wifi-setup/wpa_cli', '-i', self.wiface, 'status')
         out = str(res["stdout"])
         if out:
             return dict(o.split("=") for o in out.split("\n")[:-1])
