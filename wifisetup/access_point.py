@@ -55,6 +55,8 @@ address=/#/{server}
 
     def get_iface(self):
         for iface in pyw.winterfaces():
+            LOG.debug("iface: {}".format(iface))
+        for iface in pyw.winterfaces():
             #if "wlan0" in iface:
             if "p2p" in iface:
                 return iface

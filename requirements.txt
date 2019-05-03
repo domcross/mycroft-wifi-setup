@@ -1,4 +1,4 @@
-wifi
+wifi==0.8.0rc1
 pyric
 websocket-client
 tornado

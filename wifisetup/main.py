@@ -47,10 +47,34 @@ formatter = logging.Formatter(
 ch.setFormatter(formatter)
 root.addHandler(ch)
 
+fh = logging.FileHandler('mycroft-admin-service.log')
+fh.setLevel(logging.DEBUG)
+fh.setFormatter(formatter)
+root.addHandler(fh)
+
 LOG = logging.getLogger(__name__)
 
-
 WPA_SUPPLICANT = '''# p2p_start
+ctrl_interface=/var/run/wpa_supplicant
+driver_param=p2p_device=1
+update_config=1
+device_name=''' + config.device_name + '''
+device_type=1-0050F204-1
+p2p_go_intent=10
+p2p_go_ht40=1
+network={
+    ssid="''' + config.ssid + '''"
+    psk="''' + config.password + '''"
+    proto=RSN
+    key_mgmt=WPA-PSK
+    pairwise=CCMP
+    auth_alg=OPEN
+    mode=3
+    disabled=2
+}
+# p2p_end'''
+
+WPA_SUPPLICANT1 = '''# p2p_start
 ctrl_interface=/var/run/wpa_supplicant
 country=DE
 driver_param=p2p_device=1
@@ -73,7 +97,7 @@ network={
 }
 # p2p_end'''
 
-WPA_SUPPLICANT1 = '''# p2p_start
+WPA_SUPPLICANT2 = '''# p2p_start
 network={
     ssid="''' + config.ssid + '''"
     psk="''' + config.password + '''"
@@ -86,6 +110,7 @@ network={
 def run_wifi(allow_timeout='True'):
     try:
         client = WifiClient(allow_timeout != 'False')
+        LOG.debug("WifiClient: {}".format(client))
         client.join()
     except:
         LOG.exception('Error running wifi client')

@@ -80,8 +80,9 @@ class WifiClient:
         """Send a message to javascript"""
         self.client.send(json.dumps({'type': name, 'data': data or {}}))
 
-    def on_message(self, _, message: str):
+    def on_message(self, message: str):
         """Handle communication from javascript"""
+        LOG.debug("message: {}".format(message))
         message = json.loads(message)
 
         def invalid_message(**_):
