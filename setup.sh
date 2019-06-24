@@ -17,9 +17,9 @@ source ./utils.sh
 
 if is_command sudo; then SUDO=sudo; fi
 if is_command apt-get; then
-    $SUDO apt-get install -y python3-pip wpasupplicant dnsmasq hostapd
+    $SUDO apt-get install -y python3-pip wpasupplicant dnsmasq
 else
-    echo "Could not find package manager. Please install: pip3 wpasupplicant dnsmasq hostapd"
+    echo "Could not find package manager. Please install: pip3 wpasupplicant dnsmasq"
 fi
 
 venv=$(find_venv)
